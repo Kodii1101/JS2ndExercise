@@ -3,6 +3,14 @@
 As a future athlete you just started your practice for an upcoming event. Given that on the first day you run x miles, and by the event you must be able to run y miles.
 Calculate the number of days required for you to finally reach the required distance for the event, if you increases your distance each day by 10% from the previous day.
 Print one integer representing the number of days to reach the required distance. */
+document.getElementById("fsub").onclick = function () {
+    var getx = document.getElementById("sk").valueAsNumber;
+    var gety = document.getElementById("rk").valueAsNumber;
+    document.getElementById("rh").innerHTML = checkThisss(getx, gety);
+    // console.log(checkThisss(getx, gety));
+    /*  console.log(getx + gety);
+    console.log(gety); */
+};
 
 function checkThisss(startDayKM, eventRequiredKM) {
     let x = startDayKM; //5
@@ -12,9 +20,14 @@ function checkThisss(startDayKM, eventRequiredKM) {
     let kmFinished = 0;
     let kmExcess = 0;
     let currentValue = 0;
+    let recordPerday = [];
+    let recordPerdayCount = x;
 
     if (x >= y) {
-        return "You already ran what is required. You pass!";
+        kmExcess = x - y;
+        return `You already ran what is required with an excess of ${kmExcess.toPrecision(
+            3
+        )} kilometer/s. You pass!`;
     } else {
         if (x <= 0) {
             return "You haven't moved an inch!";
@@ -29,32 +42,53 @@ function checkThisss(startDayKM, eventRequiredKM) {
                     daysFinished++;
                     kmExcess = kmFinished - y;
                 }
-                /* console.log(x);
+
+                /*  console.log(x);
                 console.log(kmFinished);
                 console.log(currentValue);
                 console.log(kmExcess);
                 for (j = 0; j <= 5; j++) {
                     console.log((x = x + x * iR));
                 } */
+
                 if (kmExcess >= 7) {
                     daysFinished--;
                     kmExcess = y - (kmFinished - currentValue);
                     kmFinished = kmFinished - currentValue;
+
+                    for (let q = 0; q < daysFinished; q++) {
+                        recordPerday[q] = `Day ${
+                            q + 1
+                        } = ${recordPerdayCount.toPrecision(3)}<br>`;
+                        recordPerdayCount =
+                            recordPerdayCount + recordPerdayCount * iR;
+                    }
+                    /* console.log(recordPerday); */
                     return `You will finish in approx ${daysFinished} day/s and run ${kmFinished.toPrecision(
                         4
                     )} km/s with a short of ${kmExcess.toPrecision(
                         3
-                    )} kilometer/s`;
+                    )} kilometer/s.<br><br>This is your record per day:<br>${recordPerday.join(
+                        ""
+                    )}`;
                 } else {
+                    for (let p = 0; p < daysFinished; p++) {
+                        recordPerdayCount =
+                            recordPerdayCount + recordPerdayCount * iR;
+                        recordPerday[p] = `Day ${
+                            p + 1
+                        } = ${recordPerdayCount.toPrecision(3)}<br>`;
+                    }
+                    /* console.log(recordPerday); */
                     return `You will finish in approx ${daysFinished} day/s and run ${kmFinished.toPrecision(
                         4
                     )} km/s with an excess of ${kmExcess.toPrecision(
                         3
-                    )} kilometer/s`;
+                    )} kilometer/s.<br><br>This is your record per day:<br> ${recordPerday.join(
+                        ""
+                    )}`;
                 }
             }
         }
     }
 } //function end
-
-console.log(checkThisss(10, 30));
