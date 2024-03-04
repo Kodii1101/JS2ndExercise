@@ -73,11 +73,11 @@ function checkThisss(startDayKM, eventRequiredKM) {
                     )}`;
                 } else {
                     for (let p = 0; p < daysFinished; p++) {
-                        recordPerdayCount =
-                            recordPerdayCount + recordPerdayCount * iR;
                         recordPerday[p] = `Day ${
                             p + 1
                         } = ${recordPerdayCount.toPrecision(3)}<br>`;
+                        recordPerdayCount =
+                            recordPerdayCount + recordPerdayCount * iR;
                     }
                     /* console.log(recordPerday); */
                     return `You will finish in approx ${daysFinished} day/s and run ${kmFinished.toPrecision(
